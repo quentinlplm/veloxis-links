@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veloxis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100dvh;
+      background: #050505;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.13) 0%, transparent 65%);
+      pointer-events: none;
+      animation: drift 6s ease-in-out infinite alternate;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -20%;
+      right: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      from { transform: translateX(-50%) translateY(0); }
+      to   { transform: translateX(-50%) translateY(-20px); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      animation: up 0.7s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .logo-ring {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .logo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(37,99,235,0.6), rgba(124,58,237,0.4), transparent 60%);
+      animation: spin 4s linear infinite;
+    }
+    .logo-ring::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #050505;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .logo {
+      position: absolute;
+      inset: 6px;
+      z-index: 1;
+      object-fit: contain;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+    }
+
+    .brand { text-align: center; }
+    .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #6b7280;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #3b82f6;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #fff;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: rgba(37,99,235,0.12);
+      border-color: rgba(37,99,235,0.25);
+      animation: up 0.7s cubic-bezier(.16,1,.3,1) 0.15s both;
+    }
+    .btn-primary:hover {
+      background: rgba(37,99,235,0.18);
+      border-color: rgba(37,99,235,0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.07);
+      animation: up 0.7s cubic-bezier(.16,1,.3,1) 0.25s both;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+    .btn-primary .btn-icon { background: rgba(37,99,235,0.2); }
+    .btn-secondary .btn-icon { background: rgba(255,255,255,0.06); }
+
+    .btn-text { flex: 1; min-width: 0; }
+    .btn-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      display: block;
+      letter-spacing: -0.1px;
+    }
+    .btn-sub {
+      font-size: 11px;
+      color: #4b5563;
+      display: block;
+      margin-top: 1px;
+      font-weight: 400;
+    }
+
+    .arrow {
+      color: #374151;
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .btn:hover .arrow { color: #9ca3af; transform: translate(2px, -2px); }
+
+    .foot {
+      font-size: 10px;
+      color: #1f2937;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      animation: up 0.7s cubic-bezier(.16,1,.3,1) 0.35s both;
+    }
+
+    @keyframes up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <div class="top">
+      <div class="logo-ring">
+        <img
+          src="https://jomszjidjvbkwuazjdtf.supabase.co/storage/v1/object/public/brand/logo%20veloxis%20V.png"
+          alt="Veloxis"
+          class="logo"
+        />
+      </div>
+      <div class="brand">
+        <div class="brand-name">Veloxis</div>
+        <div class="brand-tag">
+          <span class="dot"></span>
+          Bêta ouverte · 3 semaines gratuites
+        </div>
+      </div>
+    </div>
+
+    <div class="links">
+
+      <a class="btn btn-primary" href="#" onclick="openChrome(); return false;">
+        <div class="btn-icon">🌐</div>
+        <div class="btn-text">
+          <span class="btn-label">Accéder au Studio</span>
+          <span class="btn-sub">veloxisapp.com — ouvre dans Chrome</span>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="btn btn-secondary" href="https://instagram.com/veloxisapp" target="_blank">
+        <div class="btn-icon">📸</div>
+        <div class="btn-text">
+          <span class="btn-label">Instagram</span>
+          <span class="btn-sub">@veloxisapp</span>
+        </div>
+        <span class="arrow">↗</span>
+      </a>
+
+    </div>
+
+    <div class="foot">© 2026 Veloxis</div>
+
+  </div>
+
+  <script>
+    function openChrome() {
+      const host = 'veloxisapp.com';
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isIOS) {
+        window.location.href = 'googlechrome://' + host;
+      } else {
+        window.location.href = 'intent://' + host + '#Intent;scheme=https;package=com.android.chrome;end';
+      }
+      setTimeout(() => { window.location.href = 'https://' + host; }, 1500);
+    }
+  </script>
+
+</body>
+</html>
