@@ -250,11 +250,11 @@
 
     <div class="links">
 
-      <a class="btn btn-primary" href="#" onclick="openChrome(); return false;">
+      <a class="btn btn-primary" href="https://veloxisapp.com" target="_blank" rel="noopener">
         <div class="btn-icon">🌐</div>
         <div class="btn-text">
           <span class="btn-label">Accéder au Studio</span>
-          <span class="btn-sub">veloxisapp.com — ouvre dans Chrome</span>
+          <span class="btn-sub">veloxisapp.com — gratuit pendant 3 semaines</span>
         </div>
         <span class="arrow">↗</span>
       </a>
@@ -274,18 +274,6 @@
 
   </div>
 
-  <script>
-    function openChrome() {
-      const host = 'veloxisapp.com';
-      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isIOS) {
-        window.location.href = 'googlechrome://' + host;
-      } else {
-        window.location.href = 'intent://' + host + '#Intent;scheme=https;package=com.android.chrome;end';
-      }
-      setTimeout(() => { window.location.href = 'https://' + host; }, 1500);
-    }
-  </script>
 
 </body>
 </html>
